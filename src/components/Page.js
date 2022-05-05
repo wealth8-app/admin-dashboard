@@ -3,13 +3,15 @@ import { Helmet } from 'react-helmet-async';
 import { forwardRef } from 'react';
 // @mui
 import { Box } from '@mui/material';
+import { ToastContainer } from 'react-toastify';
 
 // ----------------------------------------------------------------------
 
 const Page = forwardRef(({ children, title = '', meta, ...other }, ref) => (
   <>
+    <ToastContainer limit={3} />
     <Helmet>
-      <title>{`${title} | Minimal-UI`}</title>
+      <title>{`${title} | Wealth8`}</title>
       {meta}
     </Helmet>
 

@@ -3,7 +3,7 @@ import merge from 'lodash/merge';
 import ReactApexChart from 'react-apexcharts';
 // @mui
 import { useTheme, styled } from '@mui/material/styles';
-import { Card, CardHeader } from '@mui/material';
+import { Button, Card, CardActions, CardHeader } from '@mui/material';
 // utils
 import { fNumber } from '../../../utils/formatNumber';
 // components
@@ -73,6 +73,11 @@ export default function AppCurrentVisits({ title, subheader, chartColors, chartD
       <ChartWrapperStyle dir="ltr">
         <ReactApexChart type="pie" series={chartSeries} options={chartOptions} height={280} />
       </ChartWrapperStyle>
+      <CardActions>
+        <Button variant="contained" color="primary">
+          Download Report
+        </Button>
+      </CardActions>
     </Card>
   );
 }
