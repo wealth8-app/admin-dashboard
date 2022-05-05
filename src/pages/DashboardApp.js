@@ -58,7 +58,7 @@ export default function DashboardApp() {
         <Typography variant="h4" sx={{ mb: 5 }}>
           Hi,{' '}
           <Typography variant="h4" as="span" sx={{ textTransform: 'capitalize' }}>
-            {user?.nickname}
+            {user?.name}
           </Typography>
           . Welcome back.
         </Typography>
@@ -75,16 +75,16 @@ export default function DashboardApp() {
             </Grid>
 
             <Grid item xs={12} sm={6} md={3}>
-              <AppWidgetSummary title="App Installs" total={0} icon={'ant-design:appstore'} />
+              <AppWidgetSummary title="App Downloads" total={0} icon={'ant-design:appstore'} />
             </Grid>
 
             <Grid item xs={12} sm={6} md={3}>
-              <AppWidgetSummary title="App Store Installs" total={0} color="info" icon={'ant-design:apple-filled'} />
+              <AppWidgetSummary title="App Store Downloads" total={0} color="info" icon={'ant-design:apple-filled'} />
             </Grid>
 
             <Grid item xs={12} sm={6} md={3}>
               <AppWidgetSummary
-                title="PlayStore Installs"
+                title="PlayStore Downloads"
                 total={0}
                 color="warning"
                 icon={'ant-design:android-filled'}

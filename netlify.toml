@@ -1,18 +1,16 @@
 [context.master]
   [context.master.environment]
     REACT_APP_API_URL = 'https://wealth-8-staging.herokuapp.com'
-    REACT_APP_AUTH0_DOMAIN= 'wealth8.eu.auth0.com'
-    REACT_APP_AUTH0_CLIENT_ID='uncYe2dNu7mRFhbhjKisjRtQJfoBErrR'
-    REACT_APP_AUTH0_AUDIENCE='https://wealth-8.com/api'
+    REACT_APP_AUTH0_CLIENT_ID = 'LRLESqjJ9Hmoarbzg7sj4Jbj4NFARRvb'
+    REACT_APP_AUTH0_DOMAIN = 'wealth8-admin.eu.auth0.com'
 
 [context.dev]
   [context.dev.environment]
     REACT_APP_API_URL = 'https://wealth-8-staging.herokuapp.com'
-    REACT_APP_AUTH0_DOMAIN= 'dev-56vyqipe.eu.auth0.com'
-    REACT_APP_AUTH0_CLIENT_ID= '2PJtlXujnU3Kn0ORh4CRGKWn8yl6bDZe'
-    REACT_APP_AUTH0_AUDIENCE= 'https://wealth-8.com/api'
+    REACT_APP_AUTH0_CLIENT_ID = 'LRLESqjJ9Hmoarbzg7sj4Jbj4NFARRvb'
+    REACT_APP_AUTH0_DOMAIN = 'wealth8-admin.eu.auth0.com'
 
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+from = "/*"
+status = 200
+to = "/index.html"

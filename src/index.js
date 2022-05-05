@@ -19,6 +19,8 @@ ReactDOM.render(
       redirectUri={`${window.location.origin}/dashboard/app`}
       clientId={process.env.REACT_APP_AUTH0_CLIENT_ID}
       domain={process.env.REACT_APP_AUTH0_DOMAIN}
+      audience={`https://${process.env.REACT_APP_AUTH0_DOMAIN}/api/v2/`}
+      scope="read:current_user update:current_user_metadata"
     >
       <BrowserRouter>
         <App />
