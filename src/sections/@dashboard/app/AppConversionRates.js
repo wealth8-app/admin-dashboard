@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import merge from 'lodash/merge';
 import ReactApexChart from 'react-apexcharts';
 // @mui
-import { Box, Card, CardHeader } from '@mui/material';
+import { Box, Button, Card, CardActions, CardHeader } from '@mui/material';
 // utils
 import { fNumber } from '../../../utils/formatNumber';
 // components
@@ -46,6 +46,11 @@ export default function AppConversionRates({ title, subheader, chartData, ...oth
       <Box sx={{ mx: 3 }} dir="ltr">
         <ReactApexChart type="bar" series={[{ data: chartSeries }]} options={chartOptions} height={364} />
       </Box>
+      <CardActions>
+        <Button variant="contained" color="primary">
+          Download Report
+        </Button>
+      </CardActions>
     </Card>
   );
 }

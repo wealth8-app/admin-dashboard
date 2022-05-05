@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 
 //
+import { Auth0Provider } from '@auth0/auth0-react';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import reportWebVitals from './reportWebVitals';
@@ -14,9 +15,15 @@ import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <HelmetProvider>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <Auth0Provider
+      redirectUri={`${window.location.origin}/dashboard/app`}
+      clientId={process.env.REACT_APP_AUTH0_CLIENT_ID}
+      domain={process.env.REACT_APP_AUTH0_DOMAIN}
+    >
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Auth0Provider>
   </HelmetProvider>,
   document.getElementById('root')
 );
