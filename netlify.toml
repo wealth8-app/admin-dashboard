@@ -3,7 +3,7 @@
     REACT_APP_API_URL = 'https://wealth-8-staging.herokuapp.com'
     REACT-APP_AUTH0_DOMAIN= 'wealth8.eu.auth0.com'
     REACT_APP_AUTH0_CLIENT_ID='uncYe2dNu7mRFhbhjKisjRtQJfoBErrR'
-    REACT_APP-AUTH0_AUDIENCE='https://wealth-8.com/api'
+    REACT_APP_AUTH0_AUDIENCE='https://wealth-8.com/api'
 
 [context.dev]
   [context.dev.environment]
