@@ -70,7 +70,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
           <AccountStyle>
             <Avatar src={user?.picture} alt="photoURL" />
             <Box sx={{ ml: 2 }}>
-              <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
+              <Typography variant="subtitle2" sx={{ color: 'text.primary', textTransform: 'capitalize' }}>
                 {user?.nickname || 'N/A'}
               </Typography>
             </Box>

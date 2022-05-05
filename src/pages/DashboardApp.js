@@ -35,6 +35,7 @@ export default function DashboardApp() {
         gender: [],
         age: [],
         nationality: [],
+        users: 0,
       },
     },
   } = useQuery('getAnalytics', getAnalytics);
@@ -70,7 +71,7 @@ export default function DashboardApp() {
         ) : (
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6} md={3}>
-              <AppWidgetSummary title="Users" total={0} color="success" icon={'ant-design:user'} />
+              <AppWidgetSummary title="Users" total={analytics.users || 0} color="success" icon={'ant-design:user'} />
             </Grid>
 
             <Grid item xs={12} sm={6} md={3}>
