@@ -1,38 +1,37 @@
 import { useRef, useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+// import { Link as RouterLink } from 'react-router-dom';
 // @mui
 import { alpha } from '@mui/material/styles';
-import { Box, Divider, Typography, Stack, MenuItem, Avatar, IconButton } from '@mui/material';
+import { Box, Divider, Typography, MenuItem, Avatar, IconButton } from '@mui/material';
 // components
+import { useAuth0 } from '@auth0/auth0-react';
 import MenuPopover from '../../components/MenuPopover';
-// mocks_
-import account from '../../_mock/account';
 
 // ----------------------------------------------------------------------
 
-const MENU_OPTIONS = [
-  {
-    label: 'Home',
-    icon: 'eva:home-fill',
-    linkTo: '/',
-  },
-  {
-    label: 'Profile',
-    icon: 'eva:person-fill',
-    linkTo: '#',
-  },
-  {
-    label: 'Settings',
-    icon: 'eva:settings-2-fill',
-    linkTo: '#',
-  },
-];
+// const MENU_OPTIONS = [
+//   {
+//     label: 'Home',
+//     icon: 'eva:home-fill',
+//     linkTo: '/',
+//   },
+//   {
+//     label: 'Profile',
+//     icon: 'eva:person-fill',
+//     linkTo: '#',
+//   },
+//   {
+//     label: 'Settings',
+//     icon: 'eva:settings-2-fill',
+//     linkTo: '#',
+//   },
+// ];
 
 // ----------------------------------------------------------------------
 
 export default function AccountPopover() {
   const anchorRef = useRef(null);
-
+  const { logout, user } = useAuth0();
   const [open, setOpen] = useState(null);
 
   const handleOpen = (event) => {
@@ -63,7 +62,7 @@ export default function AccountPopover() {
           }),
         }}
       >
-        <Avatar src={account.photoURL} alt="photoURL" />
+        <Avatar src={user?.picture} alt="photoURL" />
       </IconButton>
 
       <MenuPopover
@@ -82,26 +81,26 @@ export default function AccountPopover() {
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle2" noWrap>
-            {account.displayName}
+            {user?.nickname}
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
-            {account.email}
+            {user.email}
           </Typography>
         </Box>
 
         <Divider sx={{ borderStyle: 'dashed' }} />
 
-        <Stack sx={{ p: 1 }}>
+        {/* <Stack sx={{ p: 1 }}>
           {MENU_OPTIONS.map((option) => (
             <MenuItem key={option.label} to={option.linkTo} component={RouterLink} onClick={handleClose}>
               {option.label}
             </MenuItem>
           ))}
-        </Stack>
+        </Stack> */}
 
         <Divider sx={{ borderStyle: 'dashed' }} />
 
-        <MenuItem onClick={handleClose} sx={{ m: 1 }}>
+        <MenuItem onClick={() => logout({ returnTo: `${window.location.origin}/login` })} sx={{ m: 1 }}>
           Logout
         </MenuItem>
       </MenuPopover>

@@ -13,7 +13,7 @@ import DashboardApp from './pages/DashboardApp';
 
 // ----------------------------------------------------------------------
 
-export default function Router() {
+export function ProtectedRouter() {
   return useRoutes([
     {
       path: '/dashboard',
@@ -23,13 +23,20 @@ export default function Router() {
         { path: 'user', element: <User /> },
         { path: 'products', element: <Products /> },
         { path: 'blog', element: <Blog /> },
+        { path: '*', element: <Navigate to="/dashboard/app" /> },
       ],
     },
+    { path: '*', element: <Navigate to="/dashboard/app" replace /> },
+  ]);
+}
+
+export function PublicRouter() {
+  return useRoutes([
     {
       path: '/',
       element: <LogoOnlyLayout />,
       children: [
-        { path: '/', element: <Navigate to="/dashboard/app" /> },
+        { path: '/', element: <Navigate to="/login" /> },
         { path: 'login', element: <Login /> },
         { path: 'register', element: <Register /> },
         { path: '404', element: <NotFound /> },
