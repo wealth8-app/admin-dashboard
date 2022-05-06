@@ -1,9 +1,11 @@
 import PropTypes from 'prop-types';
 import merge from 'lodash/merge';
+// import CsvDownloader from 'react-csv-downloader';
 import ReactApexChart from 'react-apexcharts';
+import { CSVLink } from 'react-csv';
 // @mui
 import { useTheme, styled } from '@mui/material/styles';
-import { Button, Card, CardActions, CardHeader } from '@mui/material';
+import { Card, CardActions, CardHeader } from '@mui/material';
 // utils
 import { fNumber } from '../../../utils/formatNumber';
 // components
@@ -74,9 +76,9 @@ export default function AppCurrentVisits({ title, subheader, chartColors, chartD
         <ReactApexChart type="pie" series={chartSeries} options={chartOptions} height={280} />
       </ChartWrapperStyle>
       <CardActions>
-        <Button variant="contained" color="primary">
+        <CSVLink filename={`${title}-${new Date().toDateString()}`} data={chartData}>
           Download Report
-        </Button>
+        </CSVLink>
       </CardActions>
     </Card>
   );
