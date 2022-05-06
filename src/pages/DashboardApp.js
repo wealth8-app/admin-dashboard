@@ -75,16 +75,21 @@ export default function DashboardApp() {
             </Grid>
 
             <Grid item xs={12} sm={6} md={3}>
-              <AppWidgetSummary title="App Downloads" total={0} icon={'ant-design:appstore'} />
-            </Grid>
-
-            <Grid item xs={12} sm={6} md={3}>
-              <AppWidgetSummary title="App Store Downloads" total={0} color="info" icon={'ant-design:apple-filled'} />
+              <AppWidgetSummary title="App Downloads [wip]" total={0} icon={'ant-design:appstore'} />
             </Grid>
 
             <Grid item xs={12} sm={6} md={3}>
               <AppWidgetSummary
-                title="PlayStore Downloads"
+                title="App Store Downloads [wip]"
+                total={0}
+                color="info"
+                icon={'ant-design:apple-filled'}
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={6} md={3}>
+              <AppWidgetSummary
+                title="PlayStore Downloads [wip]"
                 total={0}
                 color="warning"
                 icon={'ant-design:android-filled'}
@@ -129,32 +134,40 @@ export default function DashboardApp() {
               ]}
             />
           </Grid> */}
-            <Grid item xs={12} md={6} lg={8}>
-              <AppConversionRates title="Status distribution" subheader="" chartData={analytics.status} />
-            </Grid>
-
-            <Grid item xs={12} md={6} lg={4}>
+            <Grid item xs={12} md={6} lg={6}>
               <AppCurrentVisits
-                title="Gender"
-                chartData={analytics.gender}
+                title="OS distribution [wip]"
+                chartData={[
+                  { label: 'ios', value: 300 },
+                  { label: 'android', value: 89 },
+                ]}
                 chartColors={[
-                  theme.palette.primary.main,
+                  theme.palette.warning.dark,
                   // theme.palette.chart.blue[0],
-                  theme.palette.chart.violet[0],
-                  theme.palette.chart.yellow[0],
+                  theme.palette.error.dark,
                 ]}
               />
             </Grid>
+            <Grid item xs={12} md={6} lg={6}>
+              <AppCurrentVisits
+                title="Gender Distribution"
+                chartData={analytics.gender}
+                chartColors={[theme.palette.primary.main, theme.palette.success.dark]}
+              />
+            </Grid>
 
-            <Grid item xs={12} md={6} lg={8}>
+            <Grid item xs={12} md={6} lg={4}>
               <AppConversionRates
-                chartColors={[
-                  theme.palette.chart.violet[0],
-                  theme.palette.chart.yellow[0],
-                  theme.palette.primary.main,
-                  // theme.palette.chart.blue[0],
-                  theme.palette.chart.yellow[0],
-                ]}
+                chartColor={theme.palette.primary.main}
+                title="User distribution"
+                subheader=""
+                chartData={analytics.status}
+              />
+            </Grid>
+
+            <Grid item xs={12} md={6} lg={4}>
+              <AppConversionRates
+                chartColor={theme.palette.success.dark}
                 title="Age Distribution"
                 subheader=""
                 chartData={analytics.age}
@@ -163,15 +176,9 @@ export default function DashboardApp() {
 
             <Grid item xs={12} md={6} lg={4}>
               <AppConversionRates
-                title="Nationalities"
+                chartColor={theme.palette.warning.dark}
+                title="Nationality Distribution"
                 chartData={analytics.nationality}
-                chartColors={[
-                  theme.palette.chart.yellow[0],
-                  theme.palette.primary.main,
-                  // theme.palette.chart.blue[0],
-                  // theme.palette.chart.violet[0],
-                  theme.palette.chart.yellow[0],
-                ]}
               />
             </Grid>
 
