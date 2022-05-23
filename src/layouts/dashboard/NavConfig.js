@@ -14,12 +14,12 @@ const navConfig = [
   {
     title: 'product details',
     path: '/dashboard/product-details',
-    icon: getIcon('eva:shopping-bag-fill'),
+    icon: getIcon('ant-design:rise'),
   },
   {
     title: 'investment details',
     path: '/dashboard/investment-details',
-    icon: getIcon('eva:shopping-bag-fill'),
+    icon: getIcon('ant-design:pound'),
   },
   // {
   //   title: 'product',
