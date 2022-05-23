@@ -8,8 +8,9 @@ import User from './pages/User';
 import Login from './pages/Login';
 import NotFound from './pages/Page404';
 import Register from './pages/Register';
-import Products from './pages/Products';
 import DashboardApp from './pages/DashboardApp';
+import ProductDetails from './pages/ProductDetails';
+import InvestmentDetails from './pages/InvestmentDetails';
 
 // ----------------------------------------------------------------------
 
@@ -21,7 +22,8 @@ export function ProtectedRouter() {
       children: [
         { path: 'app', element: <DashboardApp /> },
         { path: 'user', element: <User /> },
-        { path: 'products', element: <Products /> },
+        { path: 'product-details', element: <ProductDetails /> },
+        { path: 'investment-details', element: <InvestmentDetails /> },
         { path: 'blog', element: <Blog /> },
         { path: '*', element: <Navigate to="/dashboard/app" /> },
       ],
@@ -40,9 +42,9 @@ export function PublicRouter() {
         { path: 'login', element: <Login /> },
         { path: 'register', element: <Register /> },
         { path: '404', element: <NotFound /> },
-        { path: '*', element: <Navigate to="/404" /> },
+        { path: '*', element: <Navigate to="/login" /> },
       ],
     },
-    { path: '*', element: <Navigate to="/404" replace /> },
+    { path: '*', element: <Navigate to="/login" replace /> },
   ]);
 }

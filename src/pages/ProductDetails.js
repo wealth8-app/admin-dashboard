@@ -20,28 +20,14 @@ const useStyles = () => ({
   },
 });
 
-export default function DashboardApp() {
+export default function ProductDetails() {
   const theme = useTheme();
   const { user } = useAuth0();
   const api = useApi();
 
-  const getAnalytics = async () => api.get(ANALYTICS_REQUESTS.GET_ANALYTICS);
-  const {
-    error,
-    isLoading,
-    data = {
-      data: {
-        status: [],
-        gender: [],
-        age: [],
-        nationality: [],
-        users: 0,
-      },
-    },
-  } = useQuery('getAnalytics', getAnalytics);
+  const getAnalytics = async () => api.get(ANALYTICS_REQUESTS.GET_PRODUCT_DETAILS);
+  const { error, isLoading, data } = useQuery('getProductDetails', getAnalytics);
   const styles = useStyles();
-
-  const { data: analytics } = data;
 
   useEffect(() => {
     if (error) {
@@ -70,29 +56,20 @@ export default function DashboardApp() {
           </>
         ) : (
           <Grid container spacing={3}>
-            <Grid item xs={12} sm={6} md={3}>
-              <AppWidgetSummary title="Users" total={analytics.users || 0} color="success" icon={'ant-design:user'} />
-            </Grid>
-
-            <Grid item xs={12} sm={6} md={3}>
-              <AppWidgetSummary title="App Downloads [wip]" total={0} icon={'ant-design:appstore'} />
-            </Grid>
-
-            <Grid item xs={12} sm={6} md={3}>
+            <Grid item xs={12} sm={6}>
               <AppWidgetSummary
-                title="App Store Downloads [wip]"
-                total={0}
-                color="info"
-                icon={'ant-design:apple-filled'}
+                title="Total Number Of Accounts"
+                total={data.data?.totalAccounts || 0}
+                color="success"
+                icon={'ant-design:user'}
               />
             </Grid>
 
-            <Grid item xs={12} sm={6} md={3}>
+            <Grid item xs={12} sm={6}>
               <AppWidgetSummary
-                title="PlayStore Downloads [wip]"
-                total={0}
-                color="warning"
-                icon={'ant-design:android-filled'}
+                title="Total Number Of Portfolios"
+                total={data.data?.totalFunds || 0}
+                icon={'ant-design:appstore'}
               />
             </Grid>
             {/* <Grid item xs={12} md={6} lg={8}>
@@ -134,7 +111,7 @@ export default function DashboardApp() {
               ]}
             />
           </Grid> */}
-            <Grid item xs={12} md={6} lg={6}>
+            {/* <Grid item xs={12} md={6} lg={6}>
               <AppCurrentVisits
                 title="OS distribution [wip]"
                 chartData={[
@@ -147,38 +124,39 @@ export default function DashboardApp() {
                   theme.palette.error.dark,
                 ]}
               />
-            </Grid>
-            <Grid item xs={12} md={6} lg={6}>
+            </Grid> */}
+            <Grid item xs={12} md={6}>
               <AppCurrentVisits
-                title="Gender Distribution"
-                chartData={analytics.gender || []}
+                title="Accounts Distribution"
+                chartData={data?.data?.accounts || []}
                 chartColors={[theme.palette.primary.main, theme.palette.success.dark]}
               />
             </Grid>
 
-            <Grid item xs={12} md={6} lg={4}>
+            <Grid item xs={12} md={6}>
               <AppConversionRates
                 chartColor={theme.palette.primary.main}
-                title="User distribution"
+                title="Funds distribution"
                 subheader=""
-                chartData={analytics.status || []}
+                chartData={data?.data?.funds || []}
+                barHeight="50%"
               />
             </Grid>
 
-            <Grid item xs={12} md={6} lg={4}>
+            {/* <Grid item xs={12} md={6} lg={4}>
               <AppConversionRates
                 chartColor={theme.palette.success.dark}
                 title="Age Distribution"
                 subheader=""
-                chartData={analytics.age || []}
+                chartData={[]}
               />
-            </Grid>
+            </Grid> */}
 
-            <Grid item xs={12} md={6} lg={4}>
+            <Grid item xs={12} md={6}>
               <AppConversionRates
                 chartColor={theme.palette.warning.dark}
-                title="Nationality Distribution"
-                chartData={analytics.nationality || []}
+                title="Risk Categories"
+                chartData={data?.data?.riskCategories || []}
               />
             </Grid>
 

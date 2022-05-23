@@ -15,10 +15,11 @@ AppConversionRates.propTypes = {
   title: PropTypes.string,
   subheader: PropTypes.string,
   chartColor: PropTypes.string,
+  barHeight: PropTypes.string,
   chartData: PropTypes.array.isRequired,
 };
 
-export default function AppConversionRates({ title, subheader, chartData, chartColor, ...other }) {
+export default function AppConversionRates({ title, subheader, chartData, chartColor, barHeight = '28%', ...other }) {
   const chartLabels = chartData.map((i) => i.label);
 
   const chartSeries = chartData.map((i) => i.value);
@@ -34,7 +35,7 @@ export default function AppConversionRates({ title, subheader, chartData, chartC
       },
     },
     plotOptions: {
-      bar: { horizontal: true, barHeight: '28%', borderRadius: 2 },
+      bar: { horizontal: true, barHeight, borderRadius: 2 },
     },
     xaxis: {
       categories: chartLabels,
