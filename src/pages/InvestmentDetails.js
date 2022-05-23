@@ -26,18 +26,16 @@ export default function InvestmentDetails() {
   const getAnalytics = async () => api.get(ANALYTICS_REQUESTS.GET_INVESTMENT_DETAILS);
   const { error, isLoading, data } = useQuery('getInvestmentDetails', getAnalytics);
   const [details, setDetails] = useState({
-    totalDeposits: '£ 22869.00',
-    totalWithdrawals: '£ 6350.00',
-    totalParties: 177,
-    averageDeposit: '£ 129.20',
-    totalAUM: '£ 16519.00',
-    averageAUM: '£ 93.33',
+    totalDeposits: '£ 0.00',
+    totalWithdrawals: '£ 0.00',
+    totalParties: 0,
+    averageDeposit: '£ 0.00',
+    totalAUM: '£ 0.00',
+    averageAUM: '£ 0.00',
     weeklyChangeInAUM: '0.00 %',
-    monthlyChangeInAUM: '-16.67 %',
+    monthlyChangeInAUM: '0.00 %',
   });
   const styles = useStyles();
-
-  console.log('data', data);
 
   useEffect(() => {
     if (error) {
@@ -49,7 +47,7 @@ export default function InvestmentDetails() {
   }, [error]);
 
   useEffect(() => {
-    if (data.data) {
+    if (data?.data) {
       setDetails(data.data);
     }
   }, [data]);
