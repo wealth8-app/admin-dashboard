@@ -21,6 +21,11 @@ const navConfig = [
     path: '/dashboard/investment-details',
     icon: getIcon('ant-design:pound'),
   },
+  {
+    title: 'Retention',
+    path: '/dashboard/retention',
+    icon: getIcon('ant-design:heat-map'),
+  },
   // {
   //   title: 'product',
   //   path: '/dashboard/products',

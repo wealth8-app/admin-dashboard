@@ -11,6 +11,7 @@ import Register from './pages/Register';
 import DashboardApp from './pages/DashboardApp';
 import ProductDetails from './pages/ProductDetails';
 import InvestmentDetails from './pages/InvestmentDetails';
+import Retention from './pages/Retention';
 
 // ----------------------------------------------------------------------
 
@@ -23,6 +24,7 @@ export function ProtectedRouter() {
         { path: 'app', element: <DashboardApp /> },
         { path: 'user', element: <User /> },
         { path: 'product-details', element: <ProductDetails /> },
+        { path: 'retention', element: <Retention /> },
         { path: 'investment-details', element: <InvestmentDetails /> },
         { path: 'blog', element: <Blog /> },
         { path: '*', element: <Navigate to="/dashboard/app" /> },
