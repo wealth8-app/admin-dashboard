@@ -24,6 +24,7 @@ export default function DashboardApp() {
   const theme = useTheme();
   const { user } = useAuth0();
   const api = useApi();
+  // const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const getAnalytics = async () => api.get(ANALYTICS_REQUESTS.GET_ANALYTICS);
   const {
@@ -62,6 +63,37 @@ export default function DashboardApp() {
           </Typography>
           . Welcome back.
         </Typography>
+        {/* <Box sx={{ mb: 5, display: 'flex', justifyContent: 'flex-end', flexWrap: 'wrap' }}>
+          <FormControl>
+            <FormLabel>Select PlayStore CSV</FormLabel>
+            <Input
+              inputProps={{
+                accept:
+                  '.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel',
+              }}
+              type="file"
+            />
+          </FormControl>
+          <FormControl>
+            <FormLabel>Select AppStore CSV</FormLabel>
+            <Input
+              inputProps={{
+                accept:
+                  '.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel',
+              }}
+              type="file"
+            />
+          </FormControl>
+          <Button
+            size="small"
+            sx={{ height: 40, alignSelf: 'self-end', mt: isMobile ? 2 : 'initial' }}
+            variant="contained"
+            fullWidth={isMobile}
+            startIcon={<Iconify icon="ant-design:upload" />}
+          >
+            Upload
+          </Button>
+        </Box> */}
         {isLoading ? (
           <>
             <Skeleton variant="rectangular" style={styles.skeleton} animation="wave" height={150} />
@@ -70,31 +102,75 @@ export default function DashboardApp() {
           </>
         ) : (
           <Grid container spacing={3}>
-            <Grid item xs={12} sm={6} md={3}>
-              <AppWidgetSummary title="Users" total={analytics.users || 0} color="success" icon={'ant-design:user'} />
-            </Grid>
-
-            <Grid item xs={12} sm={6} md={3}>
-              <AppWidgetSummary title="App Downloads [wip]" total={0} icon={'ant-design:appstore'} />
-            </Grid>
-
-            <Grid item xs={12} sm={6} md={3}>
+            <Grid item xs={12}>
               <AppWidgetSummary
-                title="App Store Downloads [wip]"
-                total={0}
-                color="info"
-                icon={'ant-design:apple-filled'}
+                title="Total number of users across all platforms."
+                total={analytics.users || 0}
+                color="success"
+                icon={'ant-design:user'}
               />
             </Grid>
 
-            <Grid item xs={12} sm={6} md={3}>
+            {/* <Grid item xs={12} sm={6} md={4}>
               <AppWidgetSummary
-                title="PlayStore Downloads [wip]"
-                total={0}
+                title={
+                  <>
+                    AppStore downloads. Last updated 20/12/2022. <a href="https://twitter.com">See more.</a>
+                  </>
+                }
+                total={500}
+                color="info"
+                icon={'ant-design:apple-filled'}
+              />
+            </Grid> */}
+
+            {/* <Grid item xs={12} sm={6} md={4}>
+              <AppWidgetSummary
+                title={
+                  <>
+                    PlayStore downloads. Last updated 20/12/2022. <a href="https://twitter.com">See more.</a>
+                  </>
+                }
+                total={200}
                 color="warning"
                 icon={'ant-design:android-filled'}
               />
             </Grid>
+            <Grid item xs={12} sm={6} md={4}>
+              <AppWidgetSummary
+                title={
+                  <>
+                    Monthly Active Users. Last updated 20/12/2022. <a href="https://twitter.com">See more.</a>
+                  </>
+                }
+                total={200}
+                color="success"
+                icon={'ant-design:user'}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4}>
+              <AppWidgetSummary
+                title={
+                  <>
+                    Weekly Active Users. Last updated 20/12/2022. <a href="https://twitter.com">See more.</a>
+                  </>
+                }
+                total={200}
+                color="primary"
+                icon={'ant-design:user'}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4}>
+              <AppWidgetSummary
+                title={
+                  <>
+                    Daily Active Users. Last updated 20/12/2022. <a href="https://twitter.com">See more.</a>
+                  </>
+                }
+                total={400}
+                icon={'ant-design:user'}
+              />
+            </Grid> */}
             {/* <Grid item xs={12} md={6} lg={8}>
             <AppWebsiteVisits
               title="Website Visits"
@@ -136,11 +212,8 @@ export default function DashboardApp() {
           </Grid> */}
             <Grid item xs={12} md={6} lg={6}>
               <AppCurrentVisits
-                title="OS distribution [wip]"
-                chartData={[
-                  { label: 'ios', value: 300 },
-                  { label: 'android', value: 89 },
-                ]}
+                title="OS distribution"
+                chartData={analytics.deviceType || []}
                 chartColors={[
                   theme.palette.warning.dark,
                   // theme.palette.chart.blue[0],
