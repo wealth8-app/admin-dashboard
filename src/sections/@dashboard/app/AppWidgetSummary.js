@@ -25,7 +25,7 @@ const IconWrapperStyle = styled('div')(({ theme }) => ({
 AppWidgetSummary.propTypes = {
   color: PropTypes.string,
   icon: PropTypes.string,
-  title: PropTypes.string.isRequired,
+  title: PropTypes.node.isRequired,
   total: PropTypes.number.isRequired,
   sx: PropTypes.object,
   preserve: PropTypes.bool,

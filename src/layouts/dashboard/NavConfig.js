@@ -26,21 +26,21 @@ const navConfig = [
     path: '/dashboard/retention',
     icon: getIcon('ant-design:heat-map'),
   },
-  // {
-  //   title: 'product',
-  //   path: '/dashboard/products',
-  //   icon: getIcon('eva:people-fill'),
-  // },
-  // {
-  //   title: 'blog',
-  //   path: '/dashboard/blog',
-  //   icon: getIcon('eva:file-text-fill'),
-  // },
-  // {
-  //   title: 'login',
-  //   path: '/login',
-  //   icon: getIcon('eva:lock-fill'),
-  // },
+  {
+    title: 'Mandates',
+    path: '/dashboard/mandates',
+    icon: getIcon('eva:people-fill'),
+  },
+  {
+    title: 'Payments',
+    path: '/dashboard/payments',
+    icon: getIcon('eva:file-text-fill'),
+  },
+  {
+    title: 'Subscriptions',
+    path: '/dashboard/subscriptions',
+    icon: getIcon('eva:lock-fill'),
+  },
   // {
   //   title: 'register',
   //   path: '/register',

@@ -2,8 +2,7 @@ import { Navigate, useRoutes } from 'react-router-dom';
 // layouts
 import DashboardLayout from './layouts/dashboard';
 import LogoOnlyLayout from './layouts/LogoOnlyLayout';
-//
-import Blog from './pages/Blog';
+
 import User from './pages/User';
 import Login from './pages/Login';
 import NotFound from './pages/Page404';
@@ -12,6 +11,9 @@ import DashboardApp from './pages/DashboardApp';
 import ProductDetails from './pages/ProductDetails';
 import InvestmentDetails from './pages/InvestmentDetails';
 import Retention from './pages/Retention';
+import Mandates from './pages/Mandates';
+import Payments from './pages/Payments';
+import Subscriptions from './pages/Subscriptions';
 
 // ----------------------------------------------------------------------
 
@@ -26,7 +28,9 @@ export function ProtectedRouter() {
         { path: 'product-details', element: <ProductDetails /> },
         { path: 'retention', element: <Retention /> },
         { path: 'investment-details', element: <InvestmentDetails /> },
-        { path: 'blog', element: <Blog /> },
+        { path: 'mandates', element: <Mandates /> },
+        { path: 'payments', element: <Payments /> },
+        { path: 'subscriptions', element: <Subscriptions /> },
         { path: '*', element: <Navigate to="/dashboard/app" /> },
       ],
     },
