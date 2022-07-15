@@ -132,6 +132,13 @@ export default function ProductDetails() {
                 chartColors={[theme.palette.primary.main, theme.palette.success.dark]}
               />
             </Grid>
+            <Grid item xs={12} md={6}>
+              <AppCurrentVisits
+                title="Risk Categories"
+                chartData={data?.data?.riskCategories || []}
+                chartColors={[theme.palette.warning.dark, theme.palette.secondary.dark, theme.palette.error.dark]}
+              />
+            </Grid>
 
             <Grid item xs={12} md={6}>
               <AppConversionRates
@@ -151,14 +158,6 @@ export default function ProductDetails() {
                 chartData={[]}
               />
             </Grid> */}
-
-            <Grid item xs={12} md={6}>
-              <AppConversionRates
-                chartColor={theme.palette.warning.dark}
-                title="Risk Categories"
-                chartData={data?.data?.riskCategories || []}
-              />
-            </Grid>
 
             {/* <Grid item xs={12} md={6} lg={4}>
               <AppCurrentSubject
