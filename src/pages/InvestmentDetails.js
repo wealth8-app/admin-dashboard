@@ -70,7 +70,7 @@ export default function InvestmentDetails() {
           </>
         ) : (
           <Grid container spacing={3}>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={6} lg={4}>
               <AppWidgetSummary
                 title="Total Deposits"
                 total={details.totalDeposits}
@@ -80,7 +80,7 @@ export default function InvestmentDetails() {
               />
             </Grid>
 
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={6} lg={4}>
               <AppWidgetSummary
                 color="error"
                 title="Total Withdrawals"
@@ -89,16 +89,7 @@ export default function InvestmentDetails() {
                 preserve
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
-              <AppWidgetSummary
-                color="warning"
-                title="Total Parties"
-                total={details.totalParties}
-                icon={'ant-design:user'}
-                preserve
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={6} lg={4}>
               <AppWidgetSummary
                 color="info"
                 title="Average Deposits"
@@ -107,10 +98,16 @@ export default function InvestmentDetails() {
                 preserve
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
-              <AppWidgetSummary title="Total AUM" preserve total={details.totalAUM} icon={'ant-design:appstore'} />
+            <Grid item xs={12} sm={6} lg={4}>
+              <AppWidgetSummary
+                color="warning"
+                title="Total AUM"
+                preserve
+                total={details.totalAUM}
+                icon={'ant-design:appstore'}
+              />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={6} lg={4}>
               <AppWidgetSummary
                 color="success"
                 title="Average AUM"
@@ -119,7 +116,16 @@ export default function InvestmentDetails() {
                 preserve
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={6} lg={4}>
+              <AppWidgetSummary
+                title="Monthly  %Change in AUM"
+                total={details.monthlyChangeInAUM}
+                icon={'ant-design:money-collect'}
+                preserve
+                color="error"
+              />
+            </Grid>
+            <Grid item xs={12} sm={6} lg={4}>
               <AppWidgetSummary
                 color="info"
                 title="Weekly %Change in AUM"
@@ -128,11 +134,21 @@ export default function InvestmentDetails() {
                 preserve
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={6} lg={4}>
               <AppWidgetSummary
-                title="Monthly  %Change in AUM"
-                total={details.monthlyChangeInAUM}
-                icon={'ant-design:money-collect'}
+                color="warning"
+                title="Number of invested users this month"
+                total={0}
+                icon={'ant-design:diff'}
+                preserve
+              />
+            </Grid>
+            <Grid item xs={12} sm={6} lg={4}>
+              <AppWidgetSummary
+                color="success"
+                title="Number of invested users this week"
+                total={0}
+                icon={'ant-design:diff'}
                 preserve
               />
             </Grid>

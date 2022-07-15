@@ -102,12 +102,40 @@ export default function DashboardApp() {
           </>
         ) : (
           <Grid container spacing={3}>
-            <Grid item xs={12}>
+            <Grid item xs={12} md={6} lg={4}>
               <AppWidgetSummary
                 title="Total number of users across all platforms."
                 total={analytics.users || 0}
                 color="success"
                 icon={'ant-design:user'}
+              />
+            </Grid>
+            <Grid item xs={12} md={6} lg={4}>
+              <AppWidgetSummary
+                title="Total number of parties."
+                total={analytics.totalParties || 0}
+                color="warning"
+                icon={'ant-design:group'}
+              />
+            </Grid>
+            <Grid item xs={12} md={6} lg={4}>
+              <AppWidgetSummary
+                title={
+                  <p>
+                    Visit{' '}
+                    <a
+                      target="_blank"
+                      href="https://hq1.appsflyer.com/custom-dashboard#end=2022-07-07&grouping=attribution&pageId=149404&start=2022-06-30"
+                      rel="noreferrer"
+                    >
+                      Appsflyer
+                    </a>{' '}
+                    for details on app downloads.
+                  </p>
+                }
+                total={0}
+                color="info"
+                icon={'ant-design:appstore'}
               />
             </Grid>
 
@@ -210,7 +238,7 @@ export default function DashboardApp() {
               ]}
             />
           </Grid> */}
-            <Grid item xs={12} md={6} lg={6}>
+            <Grid item xs={12} md={6} lg={4}>
               <AppCurrentVisits
                 title="OS distribution"
                 chartData={analytics.deviceType || []}
@@ -221,15 +249,22 @@ export default function DashboardApp() {
                 ]}
               />
             </Grid>
-            <Grid item xs={12} md={6} lg={6}>
+            <Grid item xs={12} md={6} lg={4}>
               <AppCurrentVisits
                 title="Gender Distribution"
                 chartData={analytics.gender || []}
                 chartColors={[theme.palette.primary.main, theme.palette.success.dark]}
               />
             </Grid>
-
             <Grid item xs={12} md={6} lg={4}>
+              <AppCurrentVisits
+                title="Age Distribution"
+                chartData={analytics.age || []}
+                chartColors={[theme.palette.primary.main, theme.palette.success.dark]}
+              />
+            </Grid>
+
+            <Grid item xs={12} md={6} lg={6}>
               <AppConversionRates
                 chartColor={theme.palette.primary.main}
                 title="User distribution"
@@ -238,16 +273,7 @@ export default function DashboardApp() {
               />
             </Grid>
 
-            <Grid item xs={12} md={6} lg={4}>
-              <AppConversionRates
-                chartColor={theme.palette.success.dark}
-                title="Age Distribution"
-                subheader=""
-                chartData={analytics.age || []}
-              />
-            </Grid>
-
-            <Grid item xs={12} md={6} lg={4}>
+            <Grid item xs={12} md={6} lg={6}>
               <AppConversionRates
                 chartColor={theme.palette.warning.dark}
                 title="Nationality Distribution"

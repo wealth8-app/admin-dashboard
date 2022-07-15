@@ -67,19 +67,35 @@ export default function Retention() {
           </>
         ) : (
           <Grid container spacing={3}>
-            <Grid item xs={12} md={6}>
-              <AppConversionRates
-                chartColor={theme.palette.primary.main}
+            <Grid item xs={12} md={6} lg={4}>
+              <AppCurrentVisits
+                chartColors={[theme.palette.primary.main]}
                 title="% of frequent deposit per user"
                 subheader="Frequency of deposits distribution."
                 chartData={frequentDeposits?.frequency || []}
               />
             </Grid>
 
+            <Grid item xs={12} md={6} lg={4}>
+              <AppCurrentVisits
+                title="% of users that has made withdrawals"
+                chartData={retentionDetails?.withdrawals || []}
+                chartColors={[theme.palette.info.dark, theme.palette.warning.dark, theme.palette.success.dark]}
+              />
+            </Grid>
+            <Grid item xs={12} md={6} lg={4}>
+              <AppCurrentVisits
+                title="Percentage of churned users"
+                subheader="Users with > 50% withdrawal of total deposits."
+                chartData={retentionDetails?.churn || []}
+                chartColors={[theme.palette.error.main, theme.palette.info.dark]}
+              />
+            </Grid>
+
             <Grid item xs={12} md={6}>
               <AppConversionRates
                 chartColor={theme.palette.success.dark}
-                title="Large deposits"
+                title="Top depositors"
                 subheader="The top 10 portfolios with the largest valuation amount."
                 chartData={retentionDetails?.topDepositors || []}
               />
@@ -90,21 +106,6 @@ export default function Retention() {
                 title="Most frequent depositors"
                 subheader="The top 10 portfolios with the highest deposit frequency."
                 chartData={retentionDetails?.frequency || []}
-              />
-            </Grid>
-            <Grid item xs={12} md={6} lg={6}>
-              <AppCurrentVisits
-                title="% of users that has made withdrawals"
-                chartData={retentionDetails?.withdrawals || []}
-                chartColors={[theme.palette.info.dark, theme.palette.warning.dark, theme.palette.success.dark]}
-              />
-            </Grid>
-            <Grid item xs={12} md={6} lg={6}>
-              <AppCurrentVisits
-                title="Percentage of churned users"
-                subheader="Users with > 50% withdrawal of total deposits."
-                chartData={retentionDetails?.churn || []}
-                chartColors={[theme.palette.error.main, theme.palette.info.dark]}
               />
             </Grid>
           </Grid>
