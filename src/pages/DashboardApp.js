@@ -104,22 +104,6 @@ export default function DashboardApp() {
           <Grid container spacing={3}>
             <Grid item xs={12} md={6} lg={4}>
               <AppWidgetSummary
-                title="Total number of users across all platforms."
-                total={analytics.users || 0}
-                color="success"
-                icon={'ant-design:user'}
-              />
-            </Grid>
-            <Grid item xs={12} md={6} lg={4}>
-              <AppWidgetSummary
-                title="Total number of parties."
-                total={analytics.totalParties || 0}
-                color="warning"
-                icon={'ant-design:group'}
-              />
-            </Grid>
-            <Grid item xs={12} md={6} lg={4}>
-              <AppWidgetSummary
                 title={
                   <p>
                     Visit{' '}
@@ -136,6 +120,22 @@ export default function DashboardApp() {
                 total={0}
                 color="info"
                 icon={'ant-design:appstore'}
+              />
+            </Grid>
+            <Grid item xs={12} md={6} lg={4}>
+              <AppWidgetSummary
+                title="Total number of users across all platforms."
+                total={analytics.users || 0}
+                color="success"
+                icon={'ant-design:user'}
+              />
+            </Grid>
+            <Grid item xs={12} md={6} lg={4}>
+              <AppWidgetSummary
+                title="Total number of parties."
+                total={analytics.totalParties || 0}
+                color="warning"
+                icon={'ant-design:group'}
               />
             </Grid>
 

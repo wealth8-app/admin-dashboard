@@ -26,14 +26,17 @@ export default function InvestmentDetails() {
   const getAnalytics = async () => api.get(ANALYTICS_REQUESTS.GET_INVESTMENT_DETAILS);
   const { error, isLoading, data } = useQuery('getInvestmentDetails', getAnalytics);
   const [details, setDetails] = useState({
-    totalDeposits: '£ 0.00',
-    totalWithdrawals: '£ 0.00',
-    totalParties: 0,
-    averageDeposit: '£ 0.00',
-    totalAUM: '£ 0.00',
-    averageAUM: '£ 0.00',
-    weeklyChangeInAUM: '0.00 %',
-    monthlyChangeInAUM: '0.00 %',
+    totalDeposits: '£0',
+    totalWithdrawals: '£0',
+    averageDeposit: '£0',
+    totalAUM: '£0',
+    averageAUM: '£',
+    weeklyChangeInAUM: '0 %',
+    monthlyChangeInAUM: '0 %',
+    monthlyChangeComparedToTotalAUM: '0 %',
+    weeklyChangeComparedToTotalAUM: '0 %',
+    numberOfInvestedUsersThisMonth: 0,
+    numberOfInvestedUsersThisWeek: 0,
   });
   const styles = useStyles();
 
@@ -138,7 +141,7 @@ export default function InvestmentDetails() {
               <AppWidgetSummary
                 color="warning"
                 title="Number of invested users this month"
-                total={0}
+                total={details.numberOfInvestedUsersThisMonth}
                 icon={'ant-design:diff'}
                 preserve
               />
@@ -147,7 +150,25 @@ export default function InvestmentDetails() {
               <AppWidgetSummary
                 color="success"
                 title="Number of invested users this week"
-                total={0}
+                total={details.numberOfInvestedUsersThisWeek}
+                icon={'ant-design:diff'}
+                preserve
+              />
+            </Grid>
+            <Grid item xs={12} sm={6} lg={4}>
+              <AppWidgetSummary
+                color="error"
+                title="% monthly change in AUM compared to total"
+                total={details.monthlyChangeComparedToTotalAUM}
+                icon={'ant-design:diff'}
+                preserve
+              />
+            </Grid>
+            <Grid item xs={12} sm={6} lg={4}>
+              <AppWidgetSummary
+                color="info"
+                title="% weekly change in AUM compared to total"
+                total={details.weeklyChangeComparedToTotalAUM}
                 icon={'ant-design:diff'}
                 preserve
               />
