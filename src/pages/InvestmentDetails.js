@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { toast } from 'react-toastify';
 import { useAuth0 } from '@auth0/auth0-react';
+import Chart from 'react-apexcharts';
 import Page from '../components/Page';
 // sections
 import { AppWidgetSummary } from '../sections/@dashboard/app';
@@ -22,9 +23,10 @@ const useStyles = () => ({
 export default function InvestmentDetails() {
   const { user } = useAuth0();
   const api = useApi();
-
   const getAnalytics = async () => api.get(ANALYTICS_REQUESTS.GET_INVESTMENT_DETAILS);
+  const getDepositDetails = async () => api.get(ANALYTICS_REQUESTS.DEPOSIT_DETAILS);
   const { error, isLoading, data } = useQuery('getInvestmentDetails', getAnalytics);
+  const { data: depositDetails } = useQuery('getDepositDetails', getDepositDetails);
   const [details, setDetails] = useState({
     totalDeposits: '£0',
     totalWithdrawals: '£0',
@@ -172,6 +174,28 @@ export default function InvestmentDetails() {
                 icon={'ant-design:diff'}
                 preserve
               />
+            </Grid>
+            <Grid item xs={12}>
+              <Chart
+                options={{
+                  chart: {
+                    id: 'basic-bar',
+                  },
+                  xaxis: {
+                    categories: depositDetails?.data.map(({ label }) => label) || [],
+                  },
+                }}
+                series={[
+                  {
+                    name: 'Total sum of deposits (£)',
+                    data: depositDetails?.data.map(({ value }) => value) || [],
+                  },
+                ]}
+                type="line"
+                width="100%"
+                height={400}
+              />
+              <h3 style={{ textAlign: 'center' }}>Increase in deposits over time</h3>
             </Grid>
           </Grid>
         )}
