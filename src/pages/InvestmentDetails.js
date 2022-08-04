@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { toast } from 'react-toastify';
 import { useAuth0 } from '@auth0/auth0-react';
+import Chart from 'react-apexcharts';
 import Page from '../components/Page';
 // sections
 import { AppWidgetSummary } from '../sections/@dashboard/app';
@@ -22,18 +23,22 @@ const useStyles = () => ({
 export default function InvestmentDetails() {
   const { user } = useAuth0();
   const api = useApi();
-
   const getAnalytics = async () => api.get(ANALYTICS_REQUESTS.GET_INVESTMENT_DETAILS);
+  const getDepositDetails = async () => api.get(ANALYTICS_REQUESTS.DEPOSIT_DETAILS);
   const { error, isLoading, data } = useQuery('getInvestmentDetails', getAnalytics);
+  const { data: depositDetails } = useQuery('getDepositDetails', getDepositDetails);
   const [details, setDetails] = useState({
-    totalDeposits: '£ 0.00',
-    totalWithdrawals: '£ 0.00',
-    totalParties: 0,
-    averageDeposit: '£ 0.00',
-    totalAUM: '£ 0.00',
-    averageAUM: '£ 0.00',
-    weeklyChangeInAUM: '0.00 %',
-    monthlyChangeInAUM: '0.00 %',
+    totalDeposits: '£0',
+    totalWithdrawals: '£0',
+    averageDeposit: '£0',
+    totalAUM: '£0',
+    averageAUM: '£',
+    weeklyChangeInAUM: '0 %',
+    monthlyChangeInAUM: '0 %',
+    monthlyChangeComparedToTotalAUM: '0 %',
+    weeklyChangeComparedToTotalAUM: '0 %',
+    numberOfInvestedUsersThisMonth: 0,
+    numberOfInvestedUsersThisWeek: 0,
   });
   const styles = useStyles();
 
@@ -138,7 +143,7 @@ export default function InvestmentDetails() {
               <AppWidgetSummary
                 color="warning"
                 title="Number of invested users this month"
-                total={0}
+                total={details.numberOfInvestedUsersThisMonth}
                 icon={'ant-design:diff'}
                 preserve
               />
@@ -147,10 +152,50 @@ export default function InvestmentDetails() {
               <AppWidgetSummary
                 color="success"
                 title="Number of invested users this week"
-                total={0}
+                total={details.numberOfInvestedUsersThisWeek}
                 icon={'ant-design:diff'}
                 preserve
               />
+            </Grid>
+            <Grid item xs={12} sm={6} lg={4}>
+              <AppWidgetSummary
+                color="error"
+                title="% monthly change in AUM compared to total"
+                total={details.monthlyChangeComparedToTotalAUM}
+                icon={'ant-design:diff'}
+                preserve
+              />
+            </Grid>
+            <Grid item xs={12} sm={6} lg={4}>
+              <AppWidgetSummary
+                color="info"
+                title="% weekly change in AUM compared to total"
+                total={details.weeklyChangeComparedToTotalAUM}
+                icon={'ant-design:diff'}
+                preserve
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Chart
+                options={{
+                  chart: {
+                    id: 'basic-bar',
+                  },
+                  xaxis: {
+                    categories: depositDetails?.data.map(({ label }) => label) || [],
+                  },
+                }}
+                series={[
+                  {
+                    name: 'Total sum of deposits (£)',
+                    data: depositDetails?.data.map(({ value }) => value) || [],
+                  },
+                ]}
+                type="line"
+                width="100%"
+                height={400}
+              />
+              <h3 style={{ textAlign: 'center' }}>Increase in deposits over time</h3>
             </Grid>
           </Grid>
         )}

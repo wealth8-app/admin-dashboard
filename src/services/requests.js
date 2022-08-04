@@ -8,4 +8,5 @@ export const ANALYTICS_REQUESTS = {
   getMandates: (after) => `/mandate?limit=20${after ? `&after=${after}` : ''}`,
   getPayments: (after) => `/payment?limit=20${after ? `&after=${after}` : ''}`,
   getSubscriptions: (after) => `/subscription?limit=20${after ? `&after=${after}` : ''}`,
+  getAllTimeGrowth: '/deposit-details',
 };
