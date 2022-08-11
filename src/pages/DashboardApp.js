@@ -20,8 +20,6 @@ const useStyles = () => ({
   },
 });
 
-const TOTAL_LEGACY_USERS = 165;
-
 export default function DashboardApp() {
   const theme = useTheme();
   const { user } = useAuth0();
@@ -119,7 +117,7 @@ export default function DashboardApp() {
                     for details on app downloads.
                   </p>
                 }
-                total={analytics.users ? analytics.users - TOTAL_LEGACY_USERS : 0}
+                total={analytics.downloads || 0}
                 color="info"
                 icon={'ant-design:appstore'}
               />
