@@ -14,6 +14,7 @@ import Retention from './pages/Retention';
 import Mandates from './pages/Mandates';
 import Payments from './pages/Payments';
 import Subscriptions from './pages/Subscriptions';
+import Bonuses from './pages/Bonuses';
 
 // ----------------------------------------------------------------------
 
@@ -31,6 +32,7 @@ export function ProtectedRouter() {
         { path: 'mandates', element: <Mandates /> },
         { path: 'payments', element: <Payments /> },
         { path: 'subscriptions', element: <Subscriptions /> },
+        { path: 'bonuses', element: <Bonuses /> },
         { path: '*', element: <Navigate to="/dashboard/app" /> },
       ],
     },

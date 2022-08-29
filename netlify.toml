@@ -1,6 +1,6 @@
 [context.master]
   [context.master.environment]
-    REACT_APP_API_URL = 'https://wealth-8-staging.herokuapp.com'
+    REACT_APP_API_URL = 'https://wealth8-prod.herokuapp.com/'
     REACT_APP_AUTH0_CLIENT_ID = 'LRLESqjJ9Hmoarbzg7sj4Jbj4NFARRvb'
     REACT_APP_AUTH0_DOMAIN = 'wealth8-admin.eu.auth0.com'
 
