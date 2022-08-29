@@ -9,4 +9,5 @@ export const ANALYTICS_REQUESTS = {
   getPayments: (after) => `/payment?limit=20${after ? `&after=${after}` : ''}`,
   getSubscriptions: (after) => `/subscription?limit=20${after ? `&after=${after}` : ''}`,
   getAllTimeGrowth: '/deposit-details',
+  GET_BONUSES: 'referral/all',
 };

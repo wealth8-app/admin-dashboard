@@ -41,11 +41,11 @@ const navConfig = [
     path: '/dashboard/subscriptions',
     icon: getIcon('eva:lock-fill'),
   },
-  // {
-  //   title: 'register',
-  //   path: '/register',
-  //   icon: getIcon('eva:person-add-fill'),
-  // },
+  {
+    title: 'Bonuses',
+    path: '/dashboard/bonuses',
+    icon: getIcon('eva:gift-fill'),
+  },
   // {
   //   title: 'Not found',
   //   path: '/404',
