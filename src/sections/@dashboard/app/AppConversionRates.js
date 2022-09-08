@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
 import merge from 'lodash/merge';
+import { CSVLink } from 'react-csv';
 import ReactApexChart from 'react-apexcharts';
 // @mui
-import { Box, Button, Card, CardActions, CardHeader } from '@mui/material';
+import { Box, Card, CardActions, CardHeader } from '@mui/material';
 // utils
 import { fNumber } from '../../../utils/formatNumber';
 // components
@@ -13,10 +14,12 @@ import { BaseOptionChart } from '../../../components/chart';
 AppConversionRates.propTypes = {
   title: PropTypes.string,
   subheader: PropTypes.string,
+  chartColor: PropTypes.string,
+  barHeight: PropTypes.string,
   chartData: PropTypes.array.isRequired,
 };
 
-export default function AppConversionRates({ title, subheader, chartData, ...other }) {
+export default function AppConversionRates({ title, subheader, chartData, chartColor, barHeight = '28%', ...other }) {
   const chartLabels = chartData.map((i) => i.label);
 
   const chartSeries = chartData.map((i) => i.value);
@@ -32,11 +35,12 @@ export default function AppConversionRates({ title, subheader, chartData, ...oth
       },
     },
     plotOptions: {
-      bar: { horizontal: true, barHeight: '28%', borderRadius: 2 },
+      bar: { horizontal: true, barHeight, borderRadius: 2 },
     },
     xaxis: {
       categories: chartLabels,
     },
+    colors: [chartColor],
   });
 
   return (
@@ -47,9 +51,9 @@ export default function AppConversionRates({ title, subheader, chartData, ...oth
         <ReactApexChart type="bar" series={[{ data: chartSeries }]} options={chartOptions} height={364} />
       </Box>
       <CardActions>
-        <Button variant="contained" color="primary">
+        <CSVLink filename={`${title}-${new Date().toDateString()}`} data={chartData}>
           Download Report
-        </Button>
+        </CSVLink>
       </CardActions>
     </Card>
   );

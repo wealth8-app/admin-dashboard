@@ -24,6 +24,7 @@ export default function DashboardApp() {
   const theme = useTheme();
   const { user } = useAuth0();
   const api = useApi();
+  // const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const getAnalytics = async () => api.get(ANALYTICS_REQUESTS.GET_ANALYTICS);
   const {
@@ -58,10 +59,41 @@ export default function DashboardApp() {
         <Typography variant="h4" sx={{ mb: 5 }}>
           Hi,{' '}
           <Typography variant="h4" as="span" sx={{ textTransform: 'capitalize' }}>
-            {user?.nickname}
+            {user?.name}
           </Typography>
           . Welcome back.
         </Typography>
+        {/* <Box sx={{ mb: 5, display: 'flex', justifyContent: 'flex-end', flexWrap: 'wrap' }}>
+          <FormControl>
+            <FormLabel>Select PlayStore CSV</FormLabel>
+            <Input
+              inputProps={{
+                accept:
+                  '.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel',
+              }}
+              type="file"
+            />
+          </FormControl>
+          <FormControl>
+            <FormLabel>Select AppStore CSV</FormLabel>
+            <Input
+              inputProps={{
+                accept:
+                  '.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel',
+              }}
+              type="file"
+            />
+          </FormControl>
+          <Button
+            size="small"
+            sx={{ height: 40, alignSelf: 'self-end', mt: isMobile ? 2 : 'initial' }}
+            variant="contained"
+            fullWidth={isMobile}
+            startIcon={<Iconify icon="ant-design:upload" />}
+          >
+            Upload
+          </Button>
+        </Box> */}
         {isLoading ? (
           <>
             <Skeleton variant="rectangular" style={styles.skeleton} animation="wave" height={150} />
@@ -70,108 +102,170 @@ export default function DashboardApp() {
           </>
         ) : (
           <Grid container spacing={3}>
-            <Grid item xs={12} sm={6} md={3}>
-              <AppWidgetSummary title="Users" total={analytics.users || 0} color="success" icon={'ant-design:user'} />
-            </Grid>
-
-            <Grid item xs={12} sm={6} md={3}>
-              <AppWidgetSummary title="App Installs" total={0} icon={'ant-design:appstore'} />
-            </Grid>
-
-            <Grid item xs={12} sm={6} md={3}>
-              <AppWidgetSummary title="App Store Installs" total={0} color="info" icon={'ant-design:apple-filled'} />
-            </Grid>
-
-            <Grid item xs={12} sm={6} md={3}>
+            <Grid item xs={12} md={6} lg={4}>
               <AppWidgetSummary
-                title="PlayStore Installs"
-                total={0}
+                title={
+                  <p>
+                    Visit{' '}
+                    <a
+                      target="_blank"
+                      href="https://hq1.appsflyer.com/custom-dashboard#end=2022-07-07&grouping=attribution&pageId=149404&start=2022-06-30"
+                      rel="noreferrer noopener"
+                    >
+                      Appsflyer
+                    </a>{' '}
+                    for details on app downloads.
+                  </p>
+                }
+                total={analytics.downloads || 0}
+                color="info"
+                icon={'ant-design:appstore'}
+              />
+            </Grid>
+            <Grid item xs={12} md={6} lg={4}>
+              <AppWidgetSummary
+                title="Total number of users across all platforms."
+                total={analytics.users || 0}
+                color="success"
+                icon={'ant-design:user'}
+              />
+            </Grid>
+            <Grid item xs={12} md={6} lg={4}>
+              <AppWidgetSummary
+                title="Total number of parties."
+                total={analytics.totalParties || 0}
+                color="warning"
+                icon={'ant-design:group'}
+              />
+            </Grid>
+
+            {/* <Grid item xs={12} sm={6} md={4}>
+              <AppWidgetSummary
+                title={
+                  <>
+                    AppStore downloads. Last updated 20/12/2022. <a href="https://twitter.com">See more.</a>
+                  </>
+                }
+                total={500}
+                color="info"
+                icon={'ant-design:apple-filled'}
+              />
+            </Grid> */}
+
+            {/* <Grid item xs={12} sm={6} md={4}>
+              <AppWidgetSummary
+                title={
+                  <>
+                    PlayStore downloads. Last updated 20/12/2022. <a href="https://twitter.com">See more.</a>
+                  </>
+                }
+                total={200}
                 color="warning"
                 icon={'ant-design:android-filled'}
               />
             </Grid>
-            {/* <Grid item xs={12} md={6} lg={8}>
-            <AppWebsiteVisits
-              title="Website Visits"
-              subheader=""
-              chartLabels={[
-                '01/01/2003',
-                '02/01/2003',
-                '03/01/2003',
-                '04/01/2003',
-                '05/01/2003',
-                '06/01/2003',
-                '07/01/2003',
-                '08/01/2003',
-                '09/01/2003',
-                '10/01/2003',
-                '11/01/2003',
-              ]}
-              chartData={[
-                {
-                  name: 'Team A',
-                  type: 'column',
-                  fill: 'solid',
-                  data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30],
-                },
-                {
-                  name: 'Team B',
-                  type: 'area',
-                  fill: 'gradient',
-                  data: [44, 55, 41, 67, 22, 43, 21, 41, 56, 27, 43],
-                },
-                {
-                  name: 'Team C',
-                  type: 'line',
-                  fill: 'solid',
-                  data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39],
-                },
-              ]}
-            />
-          </Grid> */}
-            <Grid item xs={12} md={6} lg={8}>
-              <AppConversionRates title="Status distribution" subheader="" chartData={analytics.status} />
+            <Grid item xs={12} sm={6} md={4}>
+              <AppWidgetSummary
+                title={
+                  <>
+                    Monthly Active Users. Last updated 20/12/2022. <a href="https://twitter.com">See more.</a>
+                  </>
+                }
+                total={200}
+                color="success"
+                icon={'ant-design:user'}
+              />
             </Grid>
-
+            <Grid item xs={12} sm={6} md={4}>
+              <AppWidgetSummary
+                title={
+                  <>
+                    Weekly Active Users. Last updated 20/12/2022. <a href="https://twitter.com">See more.</a>
+                  </>
+                }
+                total={200}
+                color="primary"
+                icon={'ant-design:user'}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4}>
+              <AppWidgetSummary
+                title={
+                  <>
+                    Daily Active Users. Last updated 20/12/2022. <a href="https://twitter.com">See more.</a>
+                  </>
+                }
+                total={400}
+                icon={'ant-design:user'}
+              />
+            </Grid> */}
+            {/* <Grid item xs={12} md={6} lg={8}>
+              <AppWebsiteVisits
+                title="Website Visits"
+                subheader=""
+                chartLabels={[
+                  '01/01/2003',
+                  '02/01/2003',
+                  '03/01/2003',
+                  '04/01/2003',
+                  '05/01/2003',
+                  '06/01/2003',
+                  '07/01/2003',
+                  '08/01/2003',
+                  '09/01/2003',
+                  '10/01/2003',
+                  '11/01/2003',
+                ]}
+                chartData={[
+                  {
+                    name: 'Team A',
+                    type: 'column',
+                    fill: 'solid',
+                    data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30],
+                  },
+                ]}
+              />
+            </Grid> */}
             <Grid item xs={12} md={6} lg={4}>
               <AppCurrentVisits
-                title="Gender"
-                chartData={analytics.gender}
+                title="OS distribution"
+                chartData={analytics.deviceType || []}
                 chartColors={[
-                  theme.palette.primary.main,
+                  theme.palette.warning.dark,
                   // theme.palette.chart.blue[0],
-                  theme.palette.chart.violet[0],
-                  theme.palette.chart.yellow[0],
+                  theme.palette.error.dark,
                 ]}
               />
             </Grid>
-
-            <Grid item xs={12} md={6} lg={8}>
-              <AppConversionRates
-                chartColors={[
-                  theme.palette.chart.violet[0],
-                  theme.palette.chart.yellow[0],
-                  theme.palette.primary.main,
-                  // theme.palette.chart.blue[0],
-                  theme.palette.chart.yellow[0],
-                ]}
-                title="Age Distribution"
-                subheader=""
-                chartData={analytics.age}
-              />
-            </Grid>
-
             <Grid item xs={12} md={6} lg={4}>
+              <AppCurrentVisits
+                title="Gender Distribution"
+                chartData={analytics.gender || []}
+                chartColors={[theme.palette.primary.main, theme.palette.success.dark]}
+              />
+            </Grid>
+            <Grid item xs={12} md={6} lg={4}>
+              <AppCurrentVisits
+                title="Age Distribution"
+                chartData={analytics.age || []}
+                chartColors={[theme.palette.primary.main, theme.palette.success.dark]}
+              />
+            </Grid>
+
+            <Grid item xs={12} md={6} lg={6}>
               <AppConversionRates
-                title="Nationalities"
-                chartData={analytics.nationality}
-                chartColors={[
-                  theme.palette.chart.yellow[0],
-                  theme.palette.primary.main,
-                  // theme.palette.chart.blue[0],
-                  // theme.palette.chart.violet[0],
-                  theme.palette.chart.yellow[0],
-                ]}
+                chartColor={theme.palette.primary.main}
+                title="User distribution"
+                subheader=""
+                chartData={analytics.status || []}
+              />
+            </Grid>
+
+            <Grid item xs={12} md={6} lg={6}>
+              <AppConversionRates
+                chartColor={theme.palette.warning.dark}
+                title="Nationality Distribution"
+                chartData={analytics.nationality || []}
               />
             </Grid>
 
