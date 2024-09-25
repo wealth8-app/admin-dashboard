@@ -174,11 +174,11 @@ export default function Mandates() {
   }
 
   return (
-    <Page title="Mandates">
+    <Page title="Direct Debit Mandates">
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
-            Mandates
+            Direct Debit Mandates
           </Typography>
         </Stack>
 
