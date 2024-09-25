@@ -99,7 +99,7 @@ export default function InvestmentDetails() {
             <Grid item xs={12} sm={6} lg={4}>
               <AppWidgetSummary
                 color="warning"
-                title="Total AUM"
+                title="Gross AUM (YTD)"
                 preserve
                 total={details.totalAUM}
                 icon={'ant-design:appstore'}
