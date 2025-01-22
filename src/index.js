@@ -1,9 +1,9 @@
 // scroll bar
 import 'simplebar/src/simplebar.css';
 
-import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
+import { createRoot } from 'react-dom/client';
 
 //
 import { Auth0Provider } from '@auth0/auth0-react';
@@ -11,9 +11,8 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import reportWebVitals from './reportWebVitals';
 
-// ----------------------------------------------------------------------
-
-ReactDOM.render(
+const root = createRoot(document.getElementById('root'));
+root.render(
   <HelmetProvider>
     <Auth0Provider
       redirectUri={`${window.location.origin}/dashboard/app`}
@@ -26,8 +25,7 @@ ReactDOM.render(
         <App />
       </BrowserRouter>
     </Auth0Provider>
-  </HelmetProvider>,
-  document.getElementById('root')
+  </HelmetProvider>
 );
 
 // If you want to enable client cache, register instead.
