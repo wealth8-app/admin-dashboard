@@ -38,6 +38,8 @@ export default function Reports() {
     aum: 2200,
     accounts: 0,
     fundedAccounts: 0,
+    onboardingTime: 0,
+    averageSessionDuration: 0,
   });
 
   const getReports = async () =>
@@ -60,9 +62,9 @@ export default function Reports() {
       accountsCreated: state.accounts,
       accountsFunded: state.fundedAccounts,
       activeUsers: null,
-      averageSessionDuration: null,
+      averageSessionDuration: state.averageSessionDuration,
       websiteVisits: null,
-      onboardingTime: null,
+      onboardingTime: state.onboardingTime,
       supportTicketResolutionTime: null,
     },
     onSubmit: (values) => {
@@ -116,7 +118,11 @@ export default function Reports() {
                 <ReportItem title="Accounts Created" {...getFieldProps('accountsCreated')} />
                 <ReportItem title="Accounts Funded" {...getFieldProps('accountsFunded')} />
                 <ReportItem title="Active Users (App)" {...getFieldProps('activeUsers')} />
-                <ReportItem title="Average Session Duration" {...getFieldProps('averageSessionDuration')} />
+                <ReportItem
+                  title="Average Session Duration"
+                  suffix="mins"
+                  {...getFieldProps('averageSessionDuration')}
+                />
                 <ReportItem title="Website Visits" {...getFieldProps('websiteVisits')} />
                 <ReportItem title="Onboarding Time" suffix="mins" {...getFieldProps('onboardingTime')} />
                 <ReportItem

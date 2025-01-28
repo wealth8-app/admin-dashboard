@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -83,16 +84,24 @@ Font.register({
   src: `https://fonts.gstatic.com/s/lato/v16/S6u9w4BMUTPHh6UVSwiPHA.ttf`,
 });
 
-const ReportItem = ({ label, value, currency }) => {
+const ReportItem = ({ label, value, currency, duration }) => {
+  let formattedValue;
+
+  if (currency) {
+    formattedValue = `£${numeral(value).format('0,0.00')}`;
+  } else if (duration) {
+    formattedValue = `${numeral(value).format('0.00')} ${duration}`;
+  } else {
+    formattedValue = numeral(value).format('0');
+  }
+
   return (
     <View style={styles.tableRow}>
       <View style={styles.tableCol}>
-        <Text style={styles.tableCell}>{label} </Text>
+        <Text style={styles.tableCell}>{label}</Text>
       </View>
       <View style={styles.tableCol}>
-        <Text style={styles.tableCell}>
-          {currency && '£'} {numeral(value).format(currency ? '0,0.00' : '0')}
-        </Text>
+        <Text style={styles.tableCell}>{formattedValue}</Text>
       </View>
     </View>
   );
@@ -157,17 +166,22 @@ export default function Preview({ values, date }) {
                       <ReportItem label="Accounts Funded" value={values?.accountsFunded} />
 
                       <ReportItem label="Active Users (App)" value={values?.activeUsers} />
-                      <ReportItem label="Average Session Duration" value={values?.averageSessionDuration} />
+                      <ReportItem
+                        label="Average Session Duration"
+                        value={values?.averageSessionDuration}
+                        duration="minutes"
+                      />
                       <ReportItem label="Website Visits" value={values?.websiteVisits} />
                     </View>
 
                     <View style={styles.empty} />
 
                     <View style={styles.table}>
-                      <ReportItem label="Onboarding Time (mins)" value={values?.onboardingTime} />
+                      <ReportItem label="Onboarding Time" value={values?.onboardingTime} duration="minutes" />
                       <ReportItem
-                        label="Support Ticket Resolution Time (hours)"
+                        label="Support Ticket Resolution Time"
                         value={values?.supportTicketResolutionTime}
+                        // duration="hours"
                       />
                     </View>
                   </View>

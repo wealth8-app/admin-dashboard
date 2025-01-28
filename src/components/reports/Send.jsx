@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -9,9 +10,15 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Box from '@mui/material/Box';
 import Autocomplete from '@mui/material/Autocomplete';
 import Typography from '@mui/material/Typography';
+import CircularProgress from '@mui/material/CircularProgress';
+import { toast } from 'react-toastify';
+import useApi from '../../services';
+import { ANALYTICS_REQUESTS } from '../../services/requests';
 
-export default function Send() {
+export default function Send({ values, date }) {
+  const api = useApi();
   const [open, setOpen] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -19,6 +26,33 @@ export default function Send() {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const [emails, setEmails] = React.useState([accounts[0]]);
+
+  const submit = async (e) => {
+    e.preventDefault();
+
+    setLoading(true);
+    try {
+      await api.post(ANALYTICS_REQUESTS.REPORTS, {
+        date,
+        values,
+      });
+
+      toast.success('Successfully sent reports.', {
+        position: 'top-right',
+        autoClose: 5000,
+      });
+      setOpen(false);
+    } catch (error) {
+      toast.error(error.message || 'Something went wrong. Please try again.', {
+        position: 'top-right',
+        autoClose: 5000,
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -55,8 +89,12 @@ export default function Send() {
               multiple
               options={accounts}
               getOptionLabel={(option) => option.label}
-              defaultValue={[accounts[0]]}
               renderInput={(params) => <TextField {...params} variant="standard" />}
+              value={emails}
+              freeSolo
+              onChange={(e, value) => {
+                setEmails(value);
+              }}
             />
           </Box>
         </DialogContent>
@@ -65,8 +103,8 @@ export default function Send() {
           <Button onClick={handleClose} color="error">
             Cancel
           </Button>
-          <Button type="submit" variant="contained">
-            Send
+          <Button onClick={submit} variant="contained">
+            {loading ? <CircularProgress /> : 'Send'}
           </Button>
         </DialogActions>
       </Dialog>
