@@ -1,7 +1,6 @@
 // routes
 import { CookiesProvider } from 'react-cookie';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import 'react-toastify/dist/ReactToastify.min.css';
 import { useAuth0 } from '@auth0/auth0-react';
 import { ProtectedRouter, PublicRouter } from './routes';
 // theme

@@ -1,5 +1,5 @@
 import { format, formatDistanceToNow } from 'date-fns';
-
+import dayjs from 'dayjs';
 // ----------------------------------------------------------------------
 
 export function fDate(date) {
@@ -18,4 +18,8 @@ export function fToNow(date) {
   return formatDistanceToNow(new Date(date), {
     addSuffix: true,
   });
+}
+
+export function formatDate(date, format = 'MMM DD, YYYY') {
+  return dayjs(date).format(format);
 }

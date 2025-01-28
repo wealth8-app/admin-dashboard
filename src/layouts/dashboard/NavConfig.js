@@ -46,6 +46,7 @@ const navConfig = [
     path: '/dashboard/bonuses',
     icon: getIcon('eva:gift-fill'),
   },
+  
   // {
   //   title: 'Not found',
   //   path: '/404',

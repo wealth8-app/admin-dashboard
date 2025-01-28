@@ -1,6 +1,6 @@
 // @mui
 import { useTheme } from '@mui/material/styles';
-import { Grid, Container, Typography, Skeleton } from '@mui/material';
+import { Grid, Container, Typography, Skeleton, Stack } from '@mui/material';
 // components
 import { useEffect } from 'react';
 import { useQuery } from 'react-query';
@@ -11,6 +11,7 @@ import Page from '../components/Page';
 import { AppCurrentVisits, AppWidgetSummary, AppConversionRates } from '../sections/@dashboard/app';
 import { ANALYTICS_REQUESTS } from '../services/requests';
 import useApi from '../services';
+import Reports from '../components/reports/index';
 
 // ----------------------------------------------------------------------
 
@@ -56,13 +57,18 @@ export default function DashboardApp() {
   return (
     <Page title="Dashboard">
       <Container maxWidth="xl">
-        <Typography variant="h4" sx={{ mb: 5 }}>
-          Hi,{' '}
-          <Typography variant="h4" as="span" sx={{ textTransform: 'capitalize' }}>
-            {user?.name}
+        <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 5 }}>
+          <Typography variant="h4">
+            Hi,{' '}
+            <Typography variant="h4" as="span" sx={{ textTransform: 'capitalize' }}>
+              {user?.name}
+            </Typography>
+            . Welcome back.
           </Typography>
-          . Welcome back.
-        </Typography>
+
+          <Reports />
+        </Stack>
+
         {/* <Box sx={{ mb: 5, display: 'flex', justifyContent: 'flex-end', flexWrap: 'wrap' }}>
           <FormControl>
             <FormLabel>Select PlayStore CSV</FormLabel>
