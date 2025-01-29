@@ -141,9 +141,13 @@ export default function Reports() {
               Cancel
             </Button>
 
-            <PreviewReport values={values} date={`${formatDate(getFirstDayOfWeek())} - ${formatDate(new Date())}`} />
+            <PreviewReport
+              values={values}
+              startDate={formatDate(getFirstDayOfWeek())}
+              endDate={formatDate(new Date())}
+            />
 
-            <Send values={values} date={`${formatDate(getFirstDayOfWeek())} - ${formatDate(new Date())}`} />
+            <Send values={values} startDate={formatDate(getFirstDayOfWeek())} endDate={formatDate(new Date())} />
           </DialogActions>
         )}
       </Dialog>

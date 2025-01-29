@@ -5,53 +5,74 @@ import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Box from '@mui/material/Box';
 import Autocomplete from '@mui/material/Autocomplete';
-import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
 import { toast } from 'react-toastify';
+import { pdf } from '@react-pdf/renderer';
 import useApi from '../../services';
 import { ANALYTICS_REQUESTS } from '../../services/requests';
+import { generatePDFDocument } from './pdf';
+import { formatDate } from '../../utils/formatTime';
 
-export default function Send({ values, date }) {
+export default function Send({ values, startDate, endDate }) {
   const api = useApi();
+  const date = `${startDate} - ${endDate}`;
   const [open, setOpen] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
+  const [pdfBlob, setPdfBlob] = React.useState(null);
 
-  const handleClickOpen = () => {
+  const generatePdf = async () => {
+    const doc = generatePDFDocument({ values, date });
+    const blob = await pdf(doc).toBlob();
+    setPdfBlob(blob);
+  };
+
+  const handleClickOpen = async () => {
+    await generatePdf();
     setOpen(true);
   };
 
   const handleClose = () => {
+    setLoading(false);
     setOpen(false);
   };
 
-  const [emails, setEmails] = React.useState([accounts[0]]);
+  const [emails, setEmails] = React.useState([]);
 
   const submit = async (e) => {
     e.preventDefault();
 
     setLoading(true);
-    try {
-      await api.post(ANALYTICS_REQUESTS.REPORTS, {
-        date,
-        values,
-      });
 
-      toast.success('Successfully sent reports.', {
+    const formData = new FormData();
+    formData.append(
+      'emails',
+      emails.map(({ value }) => value)
+    );
+    formData.append('report', new File([pdfBlob], `${date} report.pdf`, { type: 'application/pdf' }));
+    formData.append('startDate', formatDate(startDate, 'MMMM D, YYYY'));
+    formData.append('endDate', formatDate(endDate, 'MMMM D, YYYY'));
+
+    try {
+      const response = await api.post(ANALYTICS_REQUESTS.REPORTS, formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+      setLoading(false);
+
+      toast.success(response?.data?.message || 'Successfully sent reports.', {
         position: 'top-right',
         autoClose: 5000,
       });
+      setEmails([]);
       setOpen(false);
     } catch (error) {
-      toast.error(error.message || 'Something went wrong. Please try again.', {
+      setLoading(false);
+      toast.error(error?.response?.data?.message || 'Something went wrong. Please try again.', {
         position: 'top-right',
         autoClose: 5000,
       });
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -80,16 +101,14 @@ export default function Send({ values, date }) {
       >
         <DialogTitle>Send Report</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            <Typography>Select accounts to send reports to</Typography>
-          </DialogContentText>
-
-          <Box sx={{ marginTop: 5 }}>
+          <Box sx={{ marginTop: 1 }}>
             <Autocomplete
               multiple
               options={accounts}
               getOptionLabel={(option) => option.label}
-              renderInput={(params) => <TextField {...params} variant="standard" />}
+              renderInput={(params) => (
+                <TextField {...params} variant="standard" placeholder="Select accounts to send reports to" />
+              )}
               value={emails}
               freeSolo
               onChange={(e, value) => {
@@ -103,8 +122,8 @@ export default function Send({ values, date }) {
           <Button onClick={handleClose} color="error">
             Cancel
           </Button>
-          <Button onClick={submit} variant="contained">
-            {loading ? <CircularProgress /> : 'Send'}
+          <Button onClick={submit} variant="contained" disabled={loading}>
+            {loading ? <CircularProgress size={20} /> : 'Send'}
           </Button>
         </DialogActions>
       </Dialog>
