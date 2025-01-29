@@ -137,9 +137,14 @@ export default function Reports() {
             <Button onClick={handleClose} color="error">
               Cancel
             </Button>
-            <PreviewReport values={values} date={`${formatDate(getFirstDayOfMonth())} - ${formatDate(new Date())}`} />
+            
+            <PreviewReport
+              values={values}
+              startDate={formatDate(getFirstDayOfMonth())}
+              endDate={formatDate(new Date())}
+            />
 
-            <Send values={values} date={`${formatDate(getFirstDayOfMonth())} - ${formatDate(new Date())}`} />
+            <Send values={values} startDate={formatDate(getFirstDayOfMonth())} endDate={formatDate(new Date())} />
           </DialogActions>
         )}
       </Dialog>
