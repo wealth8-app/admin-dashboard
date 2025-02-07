@@ -1,6 +1,7 @@
 // scroll bar
 import 'simplebar/src/simplebar.css';
-
+import 'react-date-range/dist/styles.css';
+import 'react-date-range/dist/theme/default.css';
 import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { createRoot } from 'react-dom/client';

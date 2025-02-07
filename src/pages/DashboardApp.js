@@ -6,13 +6,13 @@ import { useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { toast } from 'react-toastify';
 import { useAuth0 } from '@auth0/auth0-react';
+import { Link } from 'react-router-dom';
 import Page from '../components/Page';
 // sections
 import { AppCurrentVisits, AppWidgetSummary, AppConversionRates } from '../sections/@dashboard/app';
 import { ANALYTICS_REQUESTS } from '../services/requests';
 import useApi from '../services';
 import Reports from '../components/reports/index';
-
 // ----------------------------------------------------------------------
 
 const useStyles = () => ({
@@ -129,12 +129,14 @@ export default function DashboardApp() {
               />
             </Grid>
             <Grid item xs={12} md={6} lg={4}>
-              <AppWidgetSummary
-                title="Total number of users across all platforms."
-                total={analytics.users || 0}
-                color="success"
-                icon={'ant-design:user'}
-              />
+              <Link to={'/dashboard/users'}>
+                <AppWidgetSummary
+                  title="Total number of users across all platforms."
+                  total={analytics.users || 0}
+                  color="success"
+                  icon={'ant-design:user'}
+                />
+              </Link>
             </Grid>
             <Grid item xs={12} md={6} lg={4}>
               <AppWidgetSummary
