@@ -3,7 +3,7 @@ import { Navigate, useRoutes } from 'react-router-dom';
 import DashboardLayout from './layouts/dashboard';
 import LogoOnlyLayout from './layouts/LogoOnlyLayout';
 
-import User from './pages/User';
+import Users from './pages/users';
 import Login from './pages/Login';
 import NotFound from './pages/Page404';
 import Register from './pages/Register';
@@ -25,7 +25,7 @@ export function ProtectedRouter() {
       element: <DashboardLayout />,
       children: [
         { path: 'app', element: <DashboardApp /> },
-        { path: 'user', element: <User /> },
+        { path: 'users', element: <Users /> },
         { path: 'product-details', element: <ProductDetails /> },
         { path: 'retention', element: <Retention /> },
         { path: 'investment-details', element: <InvestmentDetails /> },

@@ -7,9 +7,14 @@ const getIcon = (name) => <Iconify icon={name} width={22} height={22} />;
 
 const navConfig = [
   {
-    title: 'User Details',
+    title: 'Home',
     path: '/dashboard/app',
     icon: getIcon('eva:pie-chart-2-fill'),
+  },
+  {
+    title: 'Users',
+    path: '/dashboard/users',
+    icon: getIcon('mdi:users-group'),
   },
   {
     title: 'product details',
@@ -46,7 +51,7 @@ const navConfig = [
     path: '/dashboard/bonuses',
     icon: getIcon('eva:gift-fill'),
   },
-  
+
   // {
   //   title: 'Not found',
   //   path: '/404',

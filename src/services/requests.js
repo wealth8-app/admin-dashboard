@@ -11,4 +11,5 @@ export const ANALYTICS_REQUESTS = {
   getAllTimeGrowth: '/deposit-details',
   GET_BONUSES: 'referral/all',
   REPORTS: '/reports',
+  USERS: '/users',
 };
